@@ -1,0 +1,159 @@
+﻿@model IEnumerable<TheBigZuydChallenge.Models.Adventure>
+
+
+<h2> Avonturen </h2>
+<br />
+
+
+@using (Html.BeginForm("Index", "FindAdventure", FormMethod.Get))
+{
+    @Html.TextBox("searching")
+    <input type="submit" value="Search" />
+}
+
+<br />
+
+
+
+
+<style>
+
+    .Naam {
+        position: relative;
+        left: 60px
+    }
+
+    .Kenmerken {
+        position: relative;
+        left: 130px
+    }
+
+    .Details {
+        position: relative;
+        left: 170px
+    }
+
+    .aButton {
+        position: relative;
+        bottom: 60px;
+    }
+
+
+    ul {
+        display: inline-block;
+        vertical-align: middle;
+
+    }
+
+    li{
+        position: relative;
+        left: 140px;
+    }
+</style>
+
+<table>
+    <tr>
+        <th class="Naam">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th class="Kenmerken">
+            @Html.DisplayNameFor(model => model.Tag1)
+        </th>
+        <th class="Details">
+            @Html.DisplayNameFor(model => model.Costs)
+        </th>
+    </tr>
+
+</table>
+
+@if (Model.Count() == 0)
+{
+    <tr>
+        <td colspan="3" style="color:red">
+            Geen resultaten
+        </td>
+
+    </tr>
+}
+else
+{
+
+    foreach (var item in Model)
+    {
+
+
+        <div>
+         
+                <ul style="position:absolute">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </ul>
+
+            <ul>
+                <li>
+                    @Html.DisplayFor(modelItem => item.Tag1)
+                </li>
+                <li>
+                    @Html.DisplayFor(modelItem => item.Tag2)
+                </li>
+                <li>
+                    @Html.DisplayFor(modelItem => item.Tag3)
+
+                </li>
+
+
+            </ul>
+
+
+
+
+            <ul>
+
+                <li>
+                    @Html.DisplayFor(modelItem => item.Costs)
+                </li>
+                <li>
+                    @Html.DisplayFor(modelItem => item.IdealTime)
+                </li>
+                <li>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </li>
+                <li>
+                    @Html.DisplayFor(modelItem => item.Size)
+                </li>
+
+            </ul>
+
+            <ul>
+
+                <li>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </li>
+
+
+            </ul>
+
+
+
+            <script type="text/javascript">
+              function() {
+             var status = '@ViewBag.Status';
+             if (status) {
+                 alert("success");
+           } else {
+                 alert("error");
+           }
+        }
+            </script>
+
+            <div style="text-align:right" , class="aButton">
+                @Html.ActionLink("Kies Avontuur", "ChooseAdventure", "FindAdventure", new { }, new { onclick = "return confirm('Weet je zeker dat je deze avontuur wilt kiezen?')" });
+
+            </div>
+
+        </div>
+
+    }
+}
+
+
+
